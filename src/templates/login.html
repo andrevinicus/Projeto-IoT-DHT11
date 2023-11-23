@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrafT - Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" action="/login" method="post" onsubmit="return validateForm()">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Entrar</button>
+
+            <p id="error-message" class="error-message"></p>
+
+            <a href="/cadastro">Criar uma conta</a>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script_login.js') }}"></script>
+</body>
+</html>

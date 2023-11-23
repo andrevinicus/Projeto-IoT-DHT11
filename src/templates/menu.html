@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #555;
+            padding: 10px;
+            z-index: 1;
+            width: 150px;
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+        }
+
+        .submenu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+        }
+
+        .submenu a:hover {
+            background-color: #666;
+        }
+
+        section {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nome do Seu Aplicativo</h1>
+    </header>
+    <nav>
+        <div class="menu-item">
+            <a href="/">Página Inicial</a>
+            <div class="submenu">
+                <a href="/submenu1">Submenu 1</a>
+                <a href="/submenu2">Submenu 2</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="/data">Dados do Sensor</a>
+        </div>
+        <div class="menu-item">
+            <a href="/download">Download</a>
+        </div>
+        <div class="menu-item">
+            <a href="/cadastro">Cadastro</a>
+        </div>
+        <div class="menu-item">
+            <a href="/login">Login</a>
+        </div>
+    </nav>
+    <!-- Conteúdo do seu aplicativo aqui -->
+    <section>
+        <h2>Bem-vindo à Página Inicial</h2>
+        <p>Esta é a página principal do seu aplicativo.</p>
+    </section>
+</body>
+</html>
