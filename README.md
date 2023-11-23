@@ -1,3 +1,5 @@
+![GitHub language count](https://img.shields.io/github/languages/count/andrevinicus/Projeto-IoT-DHT11)
+
 # Projeto Flask com ESP32 - Monitoramento de Dados de Sensores
 
 Este projeto utiliza Flask para criar uma aplicação web que permite o monitoramento e download de dados de sensores. A aplicação se conecta a um banco de dados PostgreSQL para recuperar e exibir informações sobre temperatura e umidade. Além disso, oferece funcionalidades de login, cadastro e download de dados em formato CSV.
