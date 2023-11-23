@@ -1,4 +1,4 @@
-![GitHub language count](https://img.shields.io/github/languages/count/andrevinicus/Projeto-IoT-DHT11),![GitHub top language](https://img.shields.io/github/languages/top/andrevinicus/Projeto-IoT-DHT11)
+![GitHub language count](https://img.shields.io/github/languages/count/andrevinicus/Projeto-IoT-DHT11),![GitHub top language](https://img.shields.io/github/languages/top/andrevinicus/Projeto-IoT-DHT11?color=008000),
 
 
 # Projeto Flask com ESP32 - Monitoramento de Dados de Sensores
