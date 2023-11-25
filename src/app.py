@@ -28,7 +28,7 @@ login_manager = LoginManager(parametros_conexao)
 #AuthMiddleware(app, login_manager)
 
 # Rota para a tela de login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     error_message = None
 
@@ -39,12 +39,16 @@ def login():
         if login_manager.authenticate(username, password):
             session['username'] = username
             session['password'] = password
-            return redirect(url_for('index'))
+            return redirect(url_for('menu'))
         else:
             error_message = 'Usuário ou senha incorretos. Tente novamente.'
 
     return render_template('login.html', error=error_message)
-@app.route('/')
+
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
