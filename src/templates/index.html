@@ -9,9 +9,8 @@
 </head>
 <body>
     <h1>Gráfico de Temperatura e Umidade</h1>
-    <canvas id="myChart" width="800" height="400"></canvas>
+    <canvas id="myChart" width="500" height="200"></canvas>
 
-    <!-- Adicione essas linhas ao seu HTML existente -->
     <form id="downloadForm">
         <label for="period">Selecione o Período:</label>
         <select name="period" id="period" onchange="toggleCustomDates()">
@@ -33,80 +32,62 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('myChart');
-
-            if (ctx) {
-                ctx = ctx.getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Temperatura',
-                            data: [],
-                            fill: false,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 2
-                        }, {
-                            label: 'Umidade',
-                            data: [],
-                            fill: false,
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            x: {
-                                type: 'time',
-                                time: {
-                                    unit: 'second'
-                                },
-                                position: 'bottom'
-                            },
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Temperatura',
+                        data: [],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: 'Umidade',
+                        data: [],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'second' },
+                            position: 'bottom'
+                        },
+                        y: { beginAtZero: true }
                     }
-                });
-
-                function fetchData() {
-                    fetch('/data')
-                        .then(response => response.json())
-                        .then(data => {
-                            myChart.data.labels = data.timestamps.map(timestamp => new Date(timestamp));
-                            myChart.data.datasets[0].data = data.temperature;
-                            myChart.data.datasets[1].data = data.humidity;
-                            myChart.update();
-                        })
-                        .catch(error => console.error('Erro ao buscar dados:', error));
                 }
+            });
 
-                setInterval(fetchData, 5000);
-                fetchData();
-            } else {
-                console.error('Elemento com ID "myChart" não encontrado.');
+            function fetchData() {
+                fetch('/data')
+                    .then(response => response.json())
+                    .then(data => {
+                        myChart.data.labels = data.timestamps.map(timestamp => new Date(timestamp));
+                        myChart.data.datasets[0].data = data.temperature;
+                        myChart.data.datasets[1].data = data.humidity;
+                        myChart.update();
+                    })
+                    .catch(error => console.error('Erro ao buscar dados:', error));
             }
+
+            setInterval(fetchData, 5000);
+            fetchData();
         });
 
         function downloadData() {
             const period = document.getElementById('period').value;
-            let startDate, endDate;
-        
-            if (period === 'custom') {
-                startDate = document.getElementById('startDate').value;
-                endDate = document.getElementById('endDate').value;
-            }
-        
+            const startDate = period === 'custom' ? document.getElementById('startDate').value : '';
+            const endDate = period === 'custom' ? document.getElementById('endDate').value : '';
             const downloadUrl = `/download?period=${period}&startdate=${startDate}&enddate=${endDate}`;
             window.location.href = downloadUrl;
         }
-        
+
         function toggleCustomDates() {
             const customDatesDiv = document.getElementById('customDates');
-            const period = document.getElementById('period').value;
-            customDatesDiv.style.display = period === 'custom' ? 'block' : 'none';
+            customDatesDiv.style.display = document.getElementById('period').value === 'custom' ? 'block' : 'none';
         }
     </script>
 </body>
