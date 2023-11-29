@@ -76,4 +76,6 @@ Este projeto utiliza Flask para criar uma aplicação web que permite o monitora
 - [Mateus Stangherlin (LinkedIn)](https://www.linkedin.com/in/mateus-stangherlin-47a1b1230/)
 - [Luiz Felipe Carli (GitHub)](https://github.com/felipeluizcarli)
 - [André Vinicius (GitHub)](https://github.com/andrevinicus/Projeto-IoT-DHT11)
+- [Ian Cadori de Siqueira(GitHub)](https://github.com/IanSiqueira)
+- [Antonio Carlos Rodrigues Da Rosa(GitHub)](https://github.com/R-DaRosa-Antonio)
 
