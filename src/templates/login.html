@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrafT - Login</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_login.css') }}">
+    <title>Login</title>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm" action="/" method="post" onsubmit="return validateForm()">
-            <label for="username">Usuário:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Entrar</button>
-
-            <p id="error-message" class="error-message"></p>
-
-            <a href="/cadastro">Criar uma conta</a>
-        </form>
+    <div class="main-login">
+        <div class="left-login">
+            <div class="left-login-content">
+                <h1>Graft</h1>
+            </div>
+            <img src="{{ url_for('static', filename='img/animaçao-login.svg') }}" class="left-login-image" alt="grafico">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>LOGIN</h1>
+                <div class="textfield">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" name="usuario" placeholder="Usuário" id="username">
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" placeholder="Senha" id="password">
+                </div>
+                <button class="btn-login" id="login-btn">Login</button>
+            </div>
+        </div>
     </div>
-
+    <script>
+        var menuRoute = "{{ url_for('menu') }}";
+    </script>
     <script src="{{ url_for('static', filename='js/script_login.js') }}"></script>
 </body>
 </html>

@@ -69,11 +69,14 @@ Este projeto utiliza Flask para criar uma aplicação web que permite o monitora
 1. Execute o arquivo `app.py` para iniciar o servidor Flask (`python app.py`).
 2. Execute a API_Flask.py para fazer integraçâo com o Banco de Dados
 3. Acesse a aplicação em um navegador (padrão: http://127.0.0.1:5000/login).
+   
+## Vidio de apresentaçao do software!
+  
+
+https://github.com/andrevinicus/Projeto-IoT-DHT11/assets/102330781/f2f02264-e370-4594-bda6-158bd546735a
 
 
-## Membros do Grupo
+## Membros da equipe
+- [André Vinicius (LinkedIn)](https://www.linkedin.com/in/andre-vinicius-gorlin-toledo-a797161b1/)
 
-- [Mateus Stangherlin (LinkedIn)](https://www.linkedin.com/in/mateus-stangherlin-47a1b1230/)
-- [Luiz Felipe Carli (GitHub)](https://github.com/felipeluizcarli)
-- [André Vinicius (GitHub)](https://github.com/andrevinicus/Projeto-IoT-DHT11)
 

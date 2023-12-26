@@ -1,23 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
 
-*{
+:root {
+    --primary-color: rgb(0, 102, 255);
+    --hover-color: rgba(1, 48, 204, 0.89);
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
+
 body {
     height: 900vh;
     background-color: rgb(210, 239, 248);
-
+    margin: 0; /* Removendo a margem padrão do body */
 }
-nav.menu-lateral{
+
+nav.menu-lateral {
     width: 85px;
     height: 100%;
-    background-color: rgb(0, 102, 255);
+    background-color: var(--primary-color);
     padding: 45px 0 40px 1%;
-    box-shadow: 3px 0 0px  rgba(1, 48, 204, 0.89);
-
+    box-shadow: 3px 0 0px rgba(1, 48, 204, 0.89);
     position: fixed;
     top: 0;
     left: 0;
@@ -25,34 +31,83 @@ nav.menu-lateral{
     transition: .4s;
     align-items: center;
 }
-nav.menu-lateral.expandir{
+
+nav.menu-lateral.expandir {
     width: 300px;
 }
-.dtn-expandir{
+nav.menu-lateral .logo h1 {
+    color: rgba(58, 53, 53, 0.80); /* Cor branca com 80% de opacidade */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.123); /* Sombra suave preta */
+    font-size: 24px; /* Tamanho da fonte */
+    margin: 1px 0; /* Margem superior e inferior de 10px, margem lateral 0 */
+}
+/* Adicione esta regra para estilizar o ícone da lupa como branco */
+nav.menu-lateral .search-bar .search-icon {
+    color: white;
+}
+
+nav.menu-lateral .search-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav.menu-lateral .search-bar i {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+nav.menu-lateral .search-bar input {
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    display: none;
+}
+
+nav.menu-lateral.expandir .search-bar input {
+    display: inline-block;
+}
+
+/* Restante do seu código CSS... */
+
+.dtn-expandir {
     width: 100;
     padding-left: 16px;
     padding-top: 0px;
-
 }
-.dtn-expandir > i{
+
+.dtn-expandir > i {
     color: #fff;
     font-size: 24px;
     cursor: pointer;
 }
-ul{
+
+ul {
     height: 100%;
     list-style-type: none;
 }
-ul li.item-menu{
+
+ul li.item-menu {
     transition: .2s;
 }
-ul li.ativo{
-    background-color:  rgba(1, 48, 204, 0.89);
+
+ul li.ativo {
+    background-color: var(--hover-color);
 }
-ul li.item-menu:hover{
-    background: rgba(1, 48, 204, 0.89);
+
+ul li.item-menu:hover {
+    background: var(--hover-color);
 }
-ul li.item-menu a{
+.chart-container.responsive-chart {
+    width: 100%; /* Altere para 100% para ocupar a largura total */
+    max-width: 600px; /* Defina um valor máximo de largura conforme necessário */
+    height: auto; /* Altura automática para manter a proporção */
+    margin: 20px auto; /* Adicione margens conforme necessário */
+}
+
+ul li.item-menu a {
     color: white;
     text-decoration: none;
     font-size: 20px;
@@ -61,16 +116,47 @@ ul li.item-menu a{
     margin-bottom: 20px;
     line-height: 40px;
 }
-ul li.item-menu a .txt-link{
-    margin-left: 70px; 
+
+ul li.item-menu a .txt-link {
+    margin-left: 70px;
     transition: .3s;
     opacity: 0;
 }
-nav.menu-lateral.expandir .txt-link{
+
+nav.menu-lateral.expandir .txt-link {
     margin-left: 40px;
     opacity: 1;
 }
-ul li.item-menu a .icon > i{
+
+ul li.item-menu a .icon > i {
     font-size: 30px;
     margin-left: 10px;
+}
+
+/* Adaptação para telas menores */
+@media screen and (max-width: 768px) {
+    nav.menu-lateral {
+        width: 60px;
+        padding: 20px 0 20px 1%;
+    }
+
+    nav.menu-lateral.expandir {
+        width: 100%;
+    }
+
+    .dtn-expandir {
+        padding-left: 10px;
+    }
+
+    ul li.item-menu a {
+        padding: 15px 4%;
+    }
+
+    ul li.item-menu a .txt-link {
+        margin-left: 50px;
+    }
+
+    nav.menu-lateral.expandir .txt-link {
+        margin-left: 20px;
+    }
 }
