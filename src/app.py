@@ -1,16 +1,16 @@
-# src/app.py
+import logging
 from flask import Flask, Response, render_template, jsonify, request, redirect, url_for, session
 from flask_cors import CORS
 from auth_middleware.auth_middleware import AuthMiddleware
 from historico_manager.historico_manager import HistoricoManager
+from relatorios.relatorios import obter_dados
 from user_manager.user_manager import UserManager
 from login_manager.login_manager import LoginManager
 import psycopg2
 
-
 app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
-app.secret_key = 'andre'  # Troque para uma chave segura em um ambiente de produção
+app.secret_key = '123' # Troque para uma chave segura em um ambiente de produção
 
 # Parâmetros de conexão
 parametros_conexao = {
@@ -21,6 +21,8 @@ parametros_conexao = {
     'password': '123'
 }
 
+
+
 historico_manager = HistoricoManager(parametros_conexao)
 login_manager = LoginManager(parametros_conexao)
 
@@ -28,7 +30,7 @@ login_manager = LoginManager(parametros_conexao)
 #AuthMiddleware(app, login_manager)
 
 # Rota para a tela de login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     error_message = None
 
@@ -39,16 +41,44 @@ def login():
         if login_manager.authenticate(username, password):
             session['username'] = username
             session['password'] = password
-            return redirect(url_for('index'))
+            return redirect(url_for('menu'))
         else:
             error_message = 'Usuário ou senha incorretos. Tente novamente.'
 
     return render_template('login.html', error=error_message)
-@app.route('/')
+
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
+@app.route('/index')
 def index():
     return render_template('index.html')
+# Rota para a tela de relatórios
+@app.route('/relatorios')
+def relatorios():
+    try:
+        timestamps, temperatura, umidade = obter_dados()  # Ajuste aqui
+        return render_template('relatorios.html', timestamps=timestamps, temperatura=temperatura, umidade=umidade)
 
-# Rota para baixar dados
+    except Exception as erro:
+        logging.error(f"Erro ao obter dados para relatórios: {erro}")
+        return jsonify({'error': 'Erro ao obter dados para relatórios'}), 500
+@app.route('/get_reports', methods=['GET'])
+def get_reports():
+    try:
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+
+        # Chame a função para obter dados filtrados com base nas datas
+        timestamps, temperatura, umidade = relatorios_instance.obter_dados_filtrados(start_date, end_date)
+
+        return jsonify({'timestamps': timestamps, 'temperatura': temperatura, 'umidade': umidade})
+
+    except Exception as erro:
+        logging.error(f"Erro ao obter dados para relatórios: {erro}")
+        return jsonify({'error': 'Erro ao obter dados para relatórios'}), 500
+
+    
 @app.route('/download', methods=['GET'])
 def download():
     startdate = request.args.get('startdate')
