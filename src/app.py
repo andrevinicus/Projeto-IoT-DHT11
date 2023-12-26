@@ -32,8 +32,6 @@ login_manager = LoginManager(parametros_conexao)
 # Rota para a tela de login
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    error_message = None
-
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -41,12 +39,11 @@ def login():
         if login_manager.authenticate(username, password):
             session['username'] = username
             session['password'] = password
-            return redirect(url_for('menu'))
+            return jsonify({'status': 'success', 'message': 'Login bem-sucedido'})
         else:
-            error_message = 'Usuário ou senha incorretos. Tente novamente.'
+            return jsonify({'status': 'error', 'message': 'Usuário ou senha incorretos. Tente novamente.'})
 
-    return render_template('login.html', error=error_message)
-
+    return render_template('login.html')
 @app.route('/menu')
 def menu():
     return render_template('menu.html')
@@ -109,9 +106,31 @@ def cadastro():
             return render_template('cadastro.html', info='Preencha todos os campos.')
 
         UserManager.adicionar_usuario(username, password, email)  # Remova o tipo_usuario_id desta linha
-        return redirect(url_for('login'))
+        return redirect(url_for('menu'))
 
     return render_template('cadastro.html', info=None)
+@app.route('/get-sensor-data', methods=['GET'])
+def post_data():
+    print("Requisição recebida")
+    temperature = request.args.get('temperature')
+    humidity = request.args.get('humidity')
+
+    if temperature is not None and humidity is not None:
+        try:
+            temperature = float(temperature)
+            humidity = float(humidity)
+
+            cur = parametros_conexao.cursor()
+            cur.execute("INSERT INTO sensor_data (temperature, humidity) VALUES (%s, %s)", (temperature, humidity))
+            parametros_conexao.commit()
+            cur.close()
+
+            return jsonify({'success': True}), 200
+        except (ValueError, psycopg2.DatabaseError) as e:
+            return jsonify({'error': 'Bad Request', 'message': str(e)}), 400
+    else:
+        return jsonify({'error': 'Missing data', 'message': 'Temperature and humidity required'}), 400
+
 
 # Rota para obter dados
 @app.route('/data')
@@ -150,3 +169,4 @@ def get_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

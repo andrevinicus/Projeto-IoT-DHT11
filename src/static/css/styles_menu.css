@@ -100,6 +100,12 @@ ul li.ativo {
 ul li.item-menu:hover {
     background: var(--hover-color);
 }
+.chart-container.responsive-chart {
+    width: 100%; /* Altere para 100% para ocupar a largura total */
+    max-width: 600px; /* Defina um valor máximo de largura conforme necessário */
+    height: auto; /* Altura automática para manter a proporção */
+    margin: 20px auto; /* Adicione margens conforme necessário */
+}
 
 ul li.item-menu a {
     color: white;

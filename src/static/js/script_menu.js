@@ -77,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 ],
             },
             options: {
+                responsive: true, // Torna o gráfico responsivo
+                maintainAspectRatio: false, // Não mantém a proporção do gráfico
                 scales: {
                     x: {
                         type: 'time',
