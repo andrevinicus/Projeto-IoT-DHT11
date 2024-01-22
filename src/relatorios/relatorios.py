@@ -1,18 +1,11 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask
+from database.database import conexao_banco
 import psycopg2
 
 app = Flask(__name__)
 
-parametros_conexao = {
-    'host': 'localhost',
-    'port': '5432',
-    'database': 'postgres',
-    'user': 'postgres',
-    'password': '123'
-}
-
 def obter_conexao():
-    return psycopg2.connect(**parametros_conexao)
+    return psycopg2.connect(**conexao_banco)
 
 def obter_dados():
     try:
