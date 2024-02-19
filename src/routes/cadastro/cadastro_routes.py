@@ -1,10 +1,10 @@
 from flask import render_template, request, redirect, url_for
 from login_manager.login_manager import LoginManager
-from database.database import conexao_banco
+from database.database_connector import conectar_banco
 from user_manager.user_manager import UserManager
 
 def configure_cadastro_route(app):
-    login_manager = LoginManager(conexao_banco)
+    login_manager = LoginManager(conectar_banco)
     
     @app.route('/cadastro', methods=['GET', 'POST'])
     def cadastro():

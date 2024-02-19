@@ -1,10 +1,11 @@
-from flask import render_template, request, jsonify, session, redirect, url_for
+from flask import jsonify, app
 import psycopg2
+from database.database_connector import conectar_banco
 from login_manager.login_manager import LoginManager
-from database.database import conexao_banco
+
 
 def configure_data_route(app):
-    login_manager = LoginManager(conexao_banco)
+    login_manager = LoginManager(conectar_banco)
     
     @app.route('/data')
     def get_data():
@@ -12,8 +13,10 @@ def configure_data_route(app):
         historico_umidade = []
         timestamps = []
 
+        connection = None  # Inicialize a variável fora do bloco try
+
         try:
-            connection = psycopg2.connect(**conexao_banco)
+            connection = psycopg2.connect(**conectar_banco)
             cursor = connection.cursor()
 
             # Exemplo de consulta para obter os últimos 10 registros com data e hora
@@ -35,7 +38,7 @@ def configure_data_route(app):
             return jsonify({'error': 'Erro ao obter dados'}), 500
 
         finally:
-            # Fechar a conexão
+            # Fechar a conexão usando o bloco with para garantir o fechamento automático
             if connection:
                 cursor.close()
                 connection.close()

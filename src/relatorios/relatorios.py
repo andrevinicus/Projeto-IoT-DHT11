@@ -1,11 +1,11 @@
 from flask import Flask
-from database.database import conexao_banco
+from database.database_connector import conectar_banco
 import psycopg2
 
 app = Flask(__name__)
 
 def obter_conexao():
-    return psycopg2.connect(**conexao_banco)
+    return psycopg2.connect(**conectar_banco)
 
 def obter_dados():
     try:

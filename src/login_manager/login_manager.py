@@ -1,6 +1,8 @@
 import psycopg2
 import bcrypt
 from psycopg2 import sql
+from database.database_connector import conectar_banco
+
 
 class LoginManager:
     def __init__(self, db_params):
@@ -17,8 +19,10 @@ class LoginManager:
             with psycopg2.connect(**self.db_params) as connection:
                 with connection.cursor() as cursor:
                     # Consulta usando sql.SQL para evitar SQL injection
-                    query = sql.SQL("SELECT username, password FROM usuarios WHERE username = {}").format(
-                        sql.Placeholder()
+                    query = sql.SQL("SELECT {id}, {password} FROM usuarios WHERE {username} = {}").format(
+                        id=sql.Identifier('username'),
+                        password=sql.Identifier('password'),
+                        username=sql.Placeholder()
                     )
                     cursor.execute(query, (username,))
                     result = cursor.fetchone()

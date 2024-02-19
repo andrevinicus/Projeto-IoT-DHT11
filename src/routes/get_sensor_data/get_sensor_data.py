@@ -1,10 +1,10 @@
 from flask import request, jsonify
 import psycopg2
 from login_manager.login_manager import LoginManager
-from database.database import conexao_banco
+from database.database_connector import conectar_banco
  
 def configure_get_sensor_data_route(app):
-    login_manager = LoginManager(conexao_banco)
+    login_manager = LoginManager(conectar_banco)
     
     @app.route('/get-sensor-data', methods=['GET'])
     def post_data():
@@ -17,9 +17,9 @@ def configure_get_sensor_data_route(app):
                 temperature = float(temperature)
                 humidity = float(humidity)
 
-                cur = conexao_banco.cursor()
+                cur = conectar_banco.cursor()
                 cur.execute("INSERT INTO sensor_data (temperature, humidity) VALUES (%s, %s)", (temperature, humidity))
-                conexao_banco.commit()
+                conectar_banco.commit()
                 cur.close()
 
                 return jsonify({'success': True}), 200

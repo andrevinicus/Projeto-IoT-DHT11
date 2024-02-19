@@ -1,11 +1,11 @@
 from flask import render_template, request, jsonify
 from login_manager.login_manager import LoginManager
-from database.database import conexao_banco
+from database.database_connector import conectar_banco
 from relatorios.relatorios import obter_dados
 import logging
 
 def configure_relatorio_route(app):
-    login_manager = LoginManager(conexao_banco)   
+    login_manager = LoginManager(conectar_banco)   
     
     @app.route('/relatorios')
     def relatorios():

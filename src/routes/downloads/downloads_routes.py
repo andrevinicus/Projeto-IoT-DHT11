@@ -1,11 +1,11 @@
 from flask import render_template, request, jsonify, session, redirect, url_for
 from historico_manager.historico_manager import HistoricoManager
 from login_manager.login_manager import LoginManager
-from database.database import conexao_banco
+from database.database_connector import conectar_banco
 
 
 def configure_downloads_route(app):
-    login_manager = LoginManager(conexao_banco)
+    login_manager = LoginManager(conectar_banco)
     
     
     @app.route('/download', methods=['GET'])

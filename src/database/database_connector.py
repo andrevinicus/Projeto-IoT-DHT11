@@ -1,6 +1,9 @@
+# Altere o nome do módulo para evitar conflitos
+# Nome do arquivo: database_connector.py
+
 import psycopg2
 
-def conexao_banco():
+def conectar_banco():
     parametros_conexao = {
         'host': 'localhost',
         'port': '5432',

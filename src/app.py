@@ -4,7 +4,7 @@ from auth_middleware.auth_middleware import AuthMiddleware
 from historico_manager.historico_manager import HistoricoManager
 from routes.cadastro.cadastro_routes import configure_cadastro_route
 from login_manager.login_manager import LoginManager
-from database.database import conexao_banco
+from database.database_connector import conectar_banco
 from routes.data.data_routes import configure_data_route
 from routes.login.login_routes import configure_login_route
 from routes.menu.menu_routes import configure_menu_route
@@ -17,8 +17,8 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
 app.secret_key = '123'
 
-historico_manager = HistoricoManager(conexao_banco)
-login_manager = LoginManager(conexao_banco)
+historico_manager = HistoricoManager(conectar_banco)
+login_manager = LoginManager(conectar_banco)
 
 # Configurar o middleware de autenticação
 #AuthMiddleware(app, login_manager)
