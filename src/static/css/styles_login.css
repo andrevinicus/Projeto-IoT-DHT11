@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 body {
-    margin: 0;
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -12,8 +15,10 @@ body * {
 .main-login {
     width: 100vw;
     height: 100vh;
-    background: #274cc5;
+    background: url('/static/img/fundo.jpg') center center no-repeat;
+    background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -21,51 +26,55 @@ body * {
 .left-login {
     position: relative;
     width: 50vw;
-    height: 100vh;
+    height: 45vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Evita rolagem interna nos elementos */
+    overflow: hidden;
 }
 
 .left-login-image {
     position: absolute;
-    max-width: 60%; /* Torna a imagem responsiva */
-    top: 30%;
+    max-width: 100%;
+    top: 35%;
     left: 25%;
 }
 
 .left-login-content {
     position: absolute;
     color: #77ffc0;
-    top: 18%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1; /* Coloca o conteúdo sobre a imagem */
+    top: -35%;
+    left: 25%;  
     font-size: 5vw;
+    text-align: center;
 }
 
 .left-login > h1 {
     font-size: 3vw;
-    color: #77ffc0;
+    color: #00ffea;
     text-align: center;
+    margin: 0;
 }
 
 .right-login {
-    width: 50vw;
+    width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: relative;
     align-items: center;
+    position: relative;
+    top: -10%;
+    left: 0%;
 }
 
 .card-login {
-    width: 100%;
-    max-width: 450px; /* Largura máxima ajustada conforme necessário */
-    margin: 50px auto; /* Ajuste as margens vertical e horizontal conforme necessário */
+    width: 20%;
+    max-width: 600px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 30px;
     background: #163bb6;
     border-radius: 20px;
@@ -111,13 +120,13 @@ body * {
 }
 
 .btn-login {
-    width: 100%; /* Ajustado para 100% da largura do contêiner .card-login */
-    padding: 16px 0; /* Ajustado para garantir que o texto esteja centralizado verticalmente */
-    margin: 25px;
+    width: 90%;
+    padding: 16px 0;
+    margin: 25px 0;
     border: none;
     border-radius: 8px;
     outline: none;
-    text-align: center; /* Adicionado para garantir que o texto esteja centralizado horizontalmente */
+    text-align: center;
     text-transform: uppercase;
     font-weight: 800;
     letter-spacing: 3px;
@@ -150,7 +159,7 @@ body * {
     }
     .left-login-image {
         width: 50vw;
-        max-height: 50vh; /* Ajuste a altura máxima conforme necessário */
+        max-height: 50vh;
     }
     .card-login {
         width: 90%;
